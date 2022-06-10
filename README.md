@@ -198,7 +198,7 @@ With the Foreign Key View created you can now create the Sub Table View. This wi
 5. Select PO Detail for your Sub Table Name.
 6. Link your PONum\_c field to the PONUM field.
 7. Click Add to save your link. Repeat steps 6 and 7 if you want to create more relationship links.
-8. When your complete click Add to create your Sub Table View.
+8. When you are complete click Add to create your Sub Table View.
 
 ![](images/04-LabelPOReceipts_27.png)
 
