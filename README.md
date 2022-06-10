@@ -275,26 +275,26 @@ This Custom Code is taken from: [https://gist.github.com/strepicor/10b8e95e643c6
 At the beginning of the customized script there is a list of namespaces. These are used to reference other portions of code.
 
 ```
-	using System;
-	using System.ComponentModel;
-	using System.Data;
-	using System.Diagnostics;
-	using System.Windows.Forms;
-	using Ice.BO;
-	using Ice.UI;
-	using Ice.Lib;
-	using Ice.Adapters;
-	using Ice.Lib.Customization;
-	using Ice.Lib.ExtendedProps;
-	using Ice.Lib.Framework;
-	using Ice.Lib.Searches;
-	using Ice.UI.FormFunctions;
+using System;
+using System.ComponentModel;
+using System.Data;
+using System.Diagnostics;
+using System.Windows.Forms;
+using Ice.BO;
+using Ice.UI;
+using Ice.Lib;
+using Ice.Adapters;
+using Ice.Lib.Customization;
+using Ice.Lib.ExtendedProps;
+using Ice.Lib.Framework;
+using Ice.Lib.Searches;
+using Ice.UI.FormFunctions;
 ```
 
 We need to add one additional namespace to this list. Add the System.Reflection Namespace to the botton of this list.
 
 ```
-	using System.Reflection;
+using System.Reflection;
 ```
 
 You now have to add the below line of code to the public class Script section of code.
@@ -304,9 +304,9 @@ Infragistics.Win.UltraWinDock.UltraDockManager dock;
 Within the InitializeCustomCode Section add the below code. Depending on which UD table you're using change the "UD105" within the code to match your UD table number.
 
 ```
-	Object obj = typeof(Ice.UI.App.UD105Entry.UD105Form).InvokeMember("baseDockManager", BindingFlags.Instance | BindingFlags.GetField | BindingFlags.NonPublic, null, UD105Form, null);
-	dock =  (Infragistics.Win.UltraWinDock.UltraDockManager)obj;                  
-	dock.DockAreas\[0\].Panes\[0\].Closed = true;
+Object obj = typeof(Ice.UI.App.UD105Entry.UD105Form).InvokeMember("baseDockManager", BindingFlags.Instance | BindingFlags.GetField | BindingFlags.NonPublic, null, UD105Form, null);
+dock =  (Infragistics.Win.UltraWinDock.UltraDockManager)obj;                  
+dock.DockAreas\[0\].Panes\[0\].Closed = true;
 ```
 
 From the tools dropdown click test code.
@@ -338,6 +338,7 @@ In the script editor a few new lines of code have been added by the Event Wizard
 
 Under **InitialCustomCode()** the below code has been added. It's used to trigger an event when the AddLineBtn is clicked. It triggers the AddLineBtn\_Click Function to run.
 
+```
 this.AddLineBtn.Click += new System.EventHandler(this.AddLineBtn\_Click);
 
 Under **DestroyCustomCode()** the below code disables the button when your done using the UD Menu.
@@ -350,14 +351,17 @@ private void AddLineBtn\_Click(object sender, System.EventArgs args)
 {
     // \*\* Place Event Handling Code Here \*\*
 }
+```
 
 A basic test can be done to see if the button event is triggering. Add a Messagebox line to your code and under tools run Test Code.
 
+```
 private void AddLineBtn\_Click(object sender, System.EventArgs args)
 {
     // \*\* Place Event Handling Code Here \*\*
     MessageBox.Show("Test");
 }
+```
 
 To test the button you must close the UD Menu and reopen it. Click the Add Line Button and a "Test" popup window should appear. You can now reprogram the function.
 
@@ -368,6 +372,7 @@ We want the AddLineBtn\_Click function to take the highlighted PO Line from the 
 - The UD105\_PODetail must be changed to match your EpiBinding property on your PO Ultragrid.
 - The UD105A must be changed to match your UD Table. Keep the A because it is relevant to the child table.
 
+```
 private void AddLineBtn\_Click(object sender, System.EventArgs args)
     {
         // \*\* Place Event Handling Code Here \*\*
@@ -413,6 +418,7 @@ private void AddLineBtn\_Click(object sender, System.EventArgs args)
         this.oTrans.Refresh();
   
     }
+```
 
 Test your code for compiling errors and correct them if necessary. Save your customization. Close and reopen the UD Menu for the changes to take place. Test the Add Line button.
 
@@ -442,20 +448,27 @@ After clicking Update All Event Code some additional code will be added to your 
 
 A variable for an EpiDataView will be created. This is used by the EpiViewNotification event trigger.
 
+```
 private EpiDataView edvUD105A;
+```
 
 Under InitialCustomCode() the below code has been added. It will trigger the event when a change occurs in the UD105A Child Key list.
 
+```
 this.edvUD105A = ((EpiDataView)(this.oTrans.EpiDataViews\["UD105A"\]));
 this.edvUD105A.EpiViewNotification += new EpiViewNotification(this.edvUD105A\_EpiViewNotification);
+```
 
 Under DestroyCustomCode() the below code disables the event trigger when you close the UD Menu.
 
+```
 this.edvUD105A.EpiViewNotification -= new EpiViewNotification(this.edvUD105A\_EpiViewNotification);
 this.edvUD105A = null;
+```
 
 This is the new event function that is called when a change occurs in the Child Key List. We must add some code to it. There is an IF statement that checks if a new row was added to the list. This is where we will add our code.
 
+```
 private void edvUD105A\_EpiViewNotification(EpiDataView view, EpiNotifyArgs args)
 {
    // \*\* Argument Properties and Uses \*\*
@@ -469,9 +482,11 @@ private void edvUD105A\_EpiViewNotification(EpiDataView view, EpiNotifyArgs args
        }
    }
 }
+```
 
 The highlighted section of code is what we will add. It performs the auto increment process. When a new line is added to the Child Key list this code checks if the new line is the very first line. If so it sets the primary key to 001. If the new line is not the first row then it checks the previous lines value and increments it by 1.
 
+```
 private void edvUD105A\_EpiViewNotification(EpiDataView view, EpiNotifyArgs args)
 {
    // \*\* Argument Properties and Uses \*\*
@@ -523,6 +538,7 @@ private void edvUD105A\_EpiViewNotification(EpiDataView view, EpiNotifyArgs args
        }
    }
 }
+```
 
 We must now return to our AddLineBtn\_Click Function and remove the following line of code.
 
@@ -559,27 +575,35 @@ In the script editor a few new lines of code have been added by the Event Wizard
 
 Under **InitialCustomCode()** the below code has been added. It's used to trigger an event when the AddPOBtn is clicked. It triggers the AddPOBtn\_Click Function to run.
 
+```
 this.AddPOBtn.Click += new System.EventHandler(this.AddPOBtn\_Click);
+```
 
 Under **DestroyCustomCode()** the below code disables the button when you're done using the UD Menu.
 
+```
 this.AddPOBtn.Click -= new System.EventHandler(this.AddPOBtn\_Click);
+```
 
 This new function is called when the AddPOBtn is clicked. We must add some code to it. Currently it does nothing.
 
+```
 private void AddPOBtn\_Click(object sender, System.EventArgs args)
     {
         // \*\* Place Event Handling Code Here \*\*
     }
+```
 
 A basic test can be done to see if the button event is triggering. Add a Messagebox line to your code and under tools run Test Code.
 
+```
 private void AddPOBtn\_Click(object sender, System.EventArgs args)
     {
         // \*\* Place Event Handling Code Here \*\*
 
         MessageBox.Show("Test");
     }
+```
 
 To test the button you must close the UD Menu and reopen it. Click the Add PO Button and a popup window should appear. You can now reprogram the function.
 
@@ -590,6 +614,7 @@ We want the AddPOBtn\_Click function to add each PO Line from the PO grid to the
 - The UD105A must be changed to match your UD Table. Keep the A because it is relevant to the child table.
 - The UD105\_PODetail must be changed to match your EpiBinding property on your PO Ultragrid.
 
+```
 private void AddPOBtn\_Click(object sender, System.EventArgs args)
     {
         // \*\* Place Event Handling Code Here \*\*
@@ -633,6 +658,7 @@ private void AddPOBtn\_Click(object sender, System.EventArgs args)
 	}
 
     }
+```
 
 Test your code for compiling errors and correct them if necessary. Save your customization. Close and reopen the UD Menu for the changes to take place. Test the button.
 
@@ -798,6 +824,7 @@ Within the function created by the event wizard add the following code.
 
 Code Taken From: [http://erp.ittoolbox.com/groups/technical-functional/epicor-l/button-to-print-a-baq-report-5264754](http://erp.ittoolbox.com/groups/technical-functional/epicor-l/button-to-print-a-baq-report-5264754)
 
+```
 private void PrintBtn\_Click(object sender, System.EventArgs args)
     //Launch the BAQReport to print the labels
     //Pass a parmater into the BAQReport(A Customization on the BAQReport Form is Required to accept a Parameter)
@@ -823,6 +850,7 @@ private void PrintBtn\_Click(object sender, System.EventArgs args)
         }
    
     }
+```
 
 Before the print button will work properly we must customize your BAQ Report menu you created. Navigate to where it is stored in the main menu. Make sure your in Developer Mode and open the BAQ Report Menu. From Tools open Customization and navigate to Form Event Wizard.
 
@@ -834,6 +862,7 @@ Before the print button will work properly we must customize your BAQ Report men
 
 Add the following highlighted lines of code to the Script Editor. Save the customization.
 
+```
 private void BAQReportForm\_Load(object sender, EventArgs args)
 {
     // Add Event Handler Code
@@ -844,6 +873,7 @@ if (BAQReportForm.LaunchFormOptions != null)
         edv.dataView\[edv.Row\]\["field1"\] = BAQReportForm.LaunchFormOptions.ContextValue.ToString(); 
     }
 }
+```
 
 We must now set both the UD Menu Customization as the default menu as well as the BAQ Report Customization. In Menu Maintenance change the Customization tab to your customization you created. You must close out of Epicor and Log back in for the changes to take place.
 
