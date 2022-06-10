@@ -275,36 +275,37 @@ This Custom Code is taken from: [https://gist.github.com/strepicor/10b8e95e643c6
 At the beginning of the customized script there is a list of namespaces. These are used to reference other portions of code.
 
 ``
-using System;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Windows.Forms;
-using Ice.BO;
-using Ice.UI;
-using Ice.Lib;
-using Ice.Adapters;
-using Ice.Lib.Customization;
-using Ice.Lib.ExtendedProps;
-using Ice.Lib.Framework;
-using Ice.Lib.Searches;
-using Ice.UI.FormFunctions;
+	using System;
+	using System.ComponentModel;
+	using System.Data;
+	using System.Diagnostics;
+	using System.Windows.Forms;
+	using Ice.BO;
+	using Ice.UI;
+	using Ice.Lib;
+	using Ice.Adapters;
+	using Ice.Lib.Customization;
+	using Ice.Lib.ExtendedProps;
+	using Ice.Lib.Framework;
+	using Ice.Lib.Searches;
+	using Ice.UI.FormFunctions;
 ``
 
 We need to add one additional namespace to this list. Add the System.Reflection Namespace to the botton of this list.
 
 ``
-using System.Reflection;
+	using System.Reflection;
 ``
 You now have to add the below line of code to the public class Script section of code.
 
 Infragistics.Win.UltraWinDock.UltraDockManager dock;
 
 Within the InitializeCustomCode Section add the below code. Depending on which UD table you're using change the "UD105" within the code to match your UD table number.
-
-Object obj = typeof(Ice.UI.App.UD105Entry.UD105Form).InvokeMember("baseDockManager", BindingFlags.Instance | BindingFlags.GetField | BindingFlags.NonPublic, null, UD105Form, null);
-dock =  (Infragistics.Win.UltraWinDock.UltraDockManager)obj;                  
-dock.DockAreas\[0\].Panes\[0\].Closed = true;
+``
+	Object obj = typeof(Ice.UI.App.UD105Entry.UD105Form).InvokeMember("baseDockManager", BindingFlags.Instance | BindingFlags.GetField | BindingFlags.NonPublic, null, UD105Form, null);
+	dock =  (Infragistics.Win.UltraWinDock.UltraDockManager)obj;                  
+	dock.DockAreas\[0\].Panes\[0\].Closed = true;
+``
 
 From the tools dropdown click test code.
 
