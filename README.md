@@ -33,9 +33,13 @@ The basic functions of the PO Receipt Label Entry Program are:
 #### Step 1 
 *Adding the UD Table to your Main Menu*
 
+---
+
 **Navigate to this program from the Main Menu:**
 
 _System Setup > Security Maintenance > **Menu Maintenance**_ 
+
+---
 
 **Here you are going to add the User Defined Menu program to your main menu within Epicor.**
 
@@ -88,9 +92,13 @@ After completing the above steps you must quit and restart your Epicor for the M
 
 In our customized UD Menu we need access to Purchase Order data. For us to be able to access PO data we need to add a PO Field to our Parent UD table. We will be adding a PO field to our UD table through the Extended UD Table Maintenance Program. When we create this new field we will add a like value that links this new field to the PO Header data table in Epicor. Later on this will allow us to access PO information using a feature called Foreign Key Views.
 
+---
+
 **Navigate to this program from the Main Menu:**
 
 _System Setup > System Maintenance > **Extended UD Table Maintenance**_
+
+---
 
 - Click New and search for and select the User Define Table that you're working with.
 
@@ -678,9 +686,13 @@ A new child line will be created in the bottom table for each PO Line above. The
 #### Step 12
 *Create the BAQ*
 
+---
+
 **Navigate to this program from the Main Menu:**
 
 _Executive Analysis > Business Activity Management > Setup > **Business Activity Query**_
+
+---
 
 We will now create a query that pulls data from your UD Table and presents the list as multiple bar code labels.
 
