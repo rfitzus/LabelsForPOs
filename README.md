@@ -1,5 +1,5 @@
 # Labels For POs
-Generating individual tags in Epicor can be completed during Receipt Entry but generating an entire PO worth of labels can be tedious.  A tag must be printed for each individual line item.  This customization was created to pull in an entire PO and print all the labels simultaneously.
+Generating individual tags in Epicor can be completed during Receipt Entry but generating an entire PO worth of labels can be tedious.  A tag must be printed for each individual line item.  This customization was created to pull in an entire PO and print all the labels simultaneously. You can continue to add additional POs to your list and print one large list of labels all simultaneously.  
 
 The PO Receipt Label Entry program is a customized menu for printing labels with barcodes. It was created using the User Defined Tables. The UD Tables are empty menus you can customize to fit your needs.
 
