@@ -274,6 +274,7 @@ This Custom Code is taken from: [https://gist.github.com/strepicor/10b8e95e643c6
 
 At the beginning of the customized script there is a list of namespaces. These are used to reference other portions of code.
 
+``
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -288,11 +289,13 @@ using Ice.Lib.ExtendedProps;
 using Ice.Lib.Framework;
 using Ice.Lib.Searches;
 using Ice.UI.FormFunctions;
+``
 
 We need to add one additional namespace to this list. Add the System.Reflection Namespace to the botton of this list.
 
+``
 using System.Reflection;
-
+``
 You now have to add the below line of code to the public class Script section of code.
 
 Infragistics.Win.UltraWinDock.UltraDockManager dock;
