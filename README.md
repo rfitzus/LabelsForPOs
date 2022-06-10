@@ -7,19 +7,19 @@ The PO Receipt Label Entry program is a customized menu for printing labels with
 
 1. [Adding the UD Table to your Main Menu](#step-1)
 2. [Rearranging the User Interface](#step-2)
-3. [Adding Fields through Extended UD Table Maintenance](#STEP3)
-4. [Regenerate the Data Model](#STEP4)
-5. [Customize the Interface](#STEP5)
-6. [Add Foreign Key Views and Sub Table Key Views](#STEP6)
-7. [Reorganize the User Interface](#STEP7)
-8. [Remove Side Panel](#STEP8)
-9. [Add Line Button](#STEP9)
-10. [Auto Increment Child Key Field](#STEP10)
-11. [Add Entire PO Button](#STEP11)
-12. [Create the BAQ](#STEP12)
-13. [Create the BAQ Report](#STEP13)
-14. [Menu Security - Add the BAQ Report to the Main Menu](#STEP14)
-15. [Script Editor - Print BAQ Report Button](#STEP15)
+3. [Adding Fields through Extended UD Table Maintenance](#step-3)
+4. [Regenerate the Data Model](#step-4)
+5. [Customize the Interface](#step-5)
+6. [Add Foreign Key Views and Sub Table Key Views](#step-6)
+7. [Reorganize the User Interface](#step-7)
+8. [Remove Side Panel](#step-8)
+9. [Add Line Button](#step-9)
+10. [Auto Increment Child Key Field](#step-10)
+11. [Add Entire PO Button](#step-11)
+12. [Create the BAQ](#step-12)
+13. [Create the BAQ Report](#step-13)
+14. [Menu Security - Add the BAQ Report to the Main Menu](#step-14)
+15. [Script Editor - Print BAQ Report Button](#step-15)
 
 The basic functions of the PO Receipt Label Entry Program are:
 
@@ -27,8 +27,6 @@ The basic functions of the PO Receipt Label Entry Program are:
 2. Highlight lines from the top grid and add them to the bottom grid.
 3. Modify quantities for each label in the bottom table.
 4. Print your list of labels through a BAQ Report.
-
-More detail on the program can be found under [PO Receipt Barcodes.](http://ralston-erp1/wiki/index.php/inventory/630/po-receipt-barcodes/)
 
 ![](images/04-LabelPOReceipts_01-1024x714.png)
 
@@ -59,10 +57,10 @@ After completing the above steps you must quit and restart your Epicor for the M
 
 ![](images/04-LabelPOReceipts_03.png)
 
-#### **Step 2** 
+#### Step 2
 *Rearranging the User Interface*
 
-**Enable [Developer Mode](http://ralston-erp1/wiki/index.php/admin/669/developer-mode/) and open your UD Menu.**
+**Enable Developer Mode and open your UD Menu.**
 
 - After restarting Epicor, navigate through the main menu to where you added your user defined menu item. In this example it was _Material Management > Shipping/Receiving > PO Receipt Labels._ When you open this menu you'll be in the default User Defined Table Menu. This is what we will be customizing to create our PO Receipt Labels Program.
 
@@ -85,7 +83,8 @@ After completing the above steps you must quit and restart your Epicor for the M
 
 ![](images/04-LabelPOReceipts_08-1024x581.png)
 
-#### **Step 3** -Adding Fields through Extended UD Table Maintenance
+#### Step 3 
+*Adding Fields through Extended UD Table Maintenance*
 
 In our customized UD Menu we need access to Purchase Order data. For us to be able to access PO data we need to add a PO Field to our Parent UD table. We will be adding a PO field to our UD table through the Extended UD Table Maintenance Program. When we create this new field we will add a like value that links this new field to the PO Header data table in Epicor. Later on this will allow us to access PO information using a feature called Foreign Key Views.
 
@@ -114,7 +113,8 @@ In Extended UD Table Maintenance:
 
 You must now run the "Regenerate the Data Model" process for this field to become active.
 
-#### **Step 4** -Regenerate the Data Model
+#### Step 4 
+*Regenerate the Data Model*
 
 Regenerating the data model updates all the fields within each SQL table. The new fields you've setup are added when this process takes place. In order to run this process you must connect to your server where you have your Epicor ERP Administrative console installed.
 
@@ -150,7 +150,8 @@ Regenerating the data model updates all the fields within each SQL table. The ne
 
 ![](images/04-LabelPOReceipts_18.png)
 
-#### **Step 5** -Customize the Interface
+#### Step 5
+*Customize the Interface*
 
 - Go back and open the UD Table you are customizing. Ensure that developer mode is turned on. Under Tools select Customization.
 
@@ -177,7 +178,8 @@ Highlight your new text box and look at its properties in the Customization wind
 
 ![](images/04-LabelPOReceipts_23.png)
 
-#### **Step 6** -Add Foreign Key Views and Sub Table Key Views
+#### Step 6 
+*Add Foreign Key Views and Sub Table Key Views*
 
 A Foreign Key View is a link between two SQL tables. We've setup a PO Number field in our User Defined Table. This field can now be linked to the actual PO Header Table. We can further link that field using a Sub Table to the PO Detail Table. With the Sub Table linked to the PO Detail table we will be able to display the PO Line items for whatever PO number we enter in our PO Number Field.
 
@@ -233,7 +235,8 @@ Save your changes, close out of your User Defined Menu and reopen it.
 
 ![](images/04-LabelPOReceipts_30.png)
 
-#### **Step 7** -Reorganize the User Interface
+#### Step 7 
+*Reorganize the User Interface*
 
 - You can now begin to clean up the user interface. We will not be using certain fields so we will hide them. Keys 2-5 and the Description will not be used. The Key1 field we will change to our Group Field.
 
@@ -267,7 +270,8 @@ Save your changes, close out of your User Defined Menu and reopen it.
 
 ![](images/04-LabelPOReceipts_38.png)
 
-#### **Step 8** -Remove Side Panel
+#### Step 8
+*Remove Side Panel*
 
 - In every UD table there is a side panel on the left side of your screen. When you don't use this feature it just takes up a large portion of the user interface. We can hide this side panel using some custom code.
 
@@ -322,7 +326,8 @@ Save your customization. Close and reopen your UD table, the side panel is now g
 
 ![](images/04-LabelPOReceipts_43.png)
 
-#### **Step 9** -Add Line Button
+#### Step 9 
+*Add Line Button*
 
 Add a button to your menu just like you added the textbox and ultragrid. In the Customization Tools Dialog window under tools dropdown open the toolbox. Add an EpiButton to your User Defined Menu. Change the button's Name property to "AddLineBtn". Change the text property to "Add Line".
 
@@ -429,7 +434,8 @@ A new child line will be created in the bottom table. The idea is that you can n
 
 To prevent this issue we must create some code to auto increment the child key field to prevent duplicates.
 
-#### **Step 10** -Auto Increment Child Key Field
+#### Step 10 
+*Auto Increment Child Key Field*
 
 To prevent duplicates we must auto increment the child key field. The Child Key field is a primary key for the UD105A SQL table. It must be distinct so we will auto increment this field based on the value of the previous field.
 
@@ -539,7 +545,8 @@ Test your code for compiling errors and correct them if necessary. Save your cus
 
 A new child line will be created in the bottom table. The idea is that you can now search for PO's and generate a combined list of PO lines. You should no longer receive an error message if you continue to click the Add Line button.
 
-#### **Step 11** -Add Entire PO Button
+#### Step 11 
+*Add Entire PO Button*
 
 This feature is not necessary but can be very useful when adding a PO with a large number of lines. Instead of clicking through each line one at a time this button will add every line on the PO to your list.
 
@@ -643,7 +650,8 @@ Test your code for compiling errors and correct them if necessary. Save your cus
 
 A new child line will be created in the bottom table for each PO Line above. The idea is that you can now add an entire PO with a single button click.
 
-#### **Step 12** - Create the BAQ
+#### Step 12
+*Create the BAQ*
 
 #### Navigate to this program from the Main Menu:
 
@@ -751,7 +759,8 @@ If you run the query again you should now have ten results(5+4+1).
 
 ![](images/04-LabelPOReceipts_69.png)
 
-#### **Step 13** - Create the BAQ Report
+#### Step 13
+*Create the BAQ Report*
 
 #### Navigate to this program from the Main Menu:
 
@@ -772,7 +781,8 @@ The BAQ Report designer will have created an SSRS Report which you can modify. O
 
 ![](images/04-LabelPOReceipts_72.png)
 
-#### **Step 14** - Menu Security - Add the BAQ Report to the Main Menu
+#### Step 14 
+*Menu Security - Add the BAQ Report to the Main Menu*
 
 #### Navigate to this program from the Main Menu:
 
@@ -782,7 +792,8 @@ Add this BAQ Report to the Epicor Main Menu. For Program Type use BAQ Report. Cl
 
 ![](images/04-LabelPOReceipts_73.png)
 
-#### **Step 15** - Script Editor - Print BAQ Report Button
+#### Step 15 
+*Script Editor - Print BAQ Report Button*
 
 We need to add a third button to the UD Menu. This will be the print button. Its function will be to automatically open the BAQ Report and have it ready to print your current group. Follow the steps from the previous button implementations. Use the event wizard to add the default code.
 
