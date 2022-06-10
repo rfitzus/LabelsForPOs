@@ -118,8 +118,6 @@ You must now run the "Regenerate the Data Model" process for this field to becom
 
 Regenerating the data model updates all the fields within each SQL table. The new fields you've setup are added when this process takes place. In order to run this process you must connect to your server where you have your Epicor ERP Administrative console installed.  Open the Epicor Admistration Console.  From the sidebar select the Server you are working in.  Run Task Agent Configuration. Highlight the server you are working in. Under Actions, Select "Stop Agent".
 
-![](images/04-LabelPOReceipts_13.png)
-
 1. Ensure all Epicor Users are logged off before running this process. Once the task agent has stopped, return to the Epicor Admin Console and Stop the Application Pool. This will take a few seconds. Once it's complete the green "Started" symbol will change to red and say "Stopped".
 
 ![](images/04-LabelPOReceipts_14-1024x293.png)
