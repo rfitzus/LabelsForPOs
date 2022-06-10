@@ -6,7 +6,7 @@ The PO Receipt Label Entry program is a customized menu for printing labels with
 #### **Steps Involved:**
 
 1. [Adding the UD Table to your Main Menu](#step-1)
-2. [Rearranging the User Interface](#STEP2)
+2. [Rearranging the User Interface](#step-2)
 3. [Adding Fields through Extended UD Table Maintenance](#STEP3)
 4. [Regenerate the Data Model](#STEP4)
 5. [Customize the Interface](#STEP5)
@@ -33,7 +33,6 @@ More detail on the program can be found under [PO Receipt Barcodes.](http://rals
 ![](images/04-LabelPOReceipts_01-1024x714.png)
 
 #### Step 1 
-
 *Adding the UD Table to your Main Menu*
 
 #### Navigate to this program from the Main Menu:
@@ -60,7 +59,8 @@ After completing the above steps you must quit and restart your Epicor for the M
 
 ![](images/04-LabelPOReceipts_03.png)
 
-#### **Step 2** -Rearranging the User Interface
+#### **Step 2** 
+*Rearranging the User Interface*
 
 **Enable [Developer Mode](http://ralston-erp1/wiki/index.php/admin/669/developer-mode/) and open your UD Menu.**
 
