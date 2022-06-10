@@ -3,7 +3,7 @@ Generating individual tags in Epicor can be completed during Receipt Entry but g
 
 The PO Receipt Label Entry program is a customized menu for printing labels with barcodes. It was created using the User Defined Tables. The UD Tables are empty menus you can customize to fit your needs.
 
-#### **Steps Involved:**
+**Steps Involved:**
 
 1. [Adding the UD Table to your Main Menu](#step-1)
 2. [Rearranging the User Interface](#step-2)
