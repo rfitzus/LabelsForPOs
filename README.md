@@ -799,9 +799,13 @@ If you run the query again you should now have ten results(5+4+1).
 #### Step 13
 *Create the BAQ Report*
 
+---
+
 **Navigate to this program from the Main Menu:**
 
 _Executive Analysis > Business Activity Management > General Operations > **BAQ Report Designer**_
+
+---
 
 Create a new BAQ Report and fill in the Detail tab.
 
@@ -821,9 +825,13 @@ The BAQ Report designer will have created an SSRS Report which you can modify. O
 #### Step 14 
 *Menu Security - Add the BAQ Report to the Main Menu*
 
+---
+
 **Navigate to this program from the Main Menu:**
 
 _System Setup > Security Maintenance > **Menu Maintenance**_
+
+---
 
 Add this BAQ Report to the Epicor Main Menu. For Program Type use BAQ Report. Click the Report Button and select your BAQ Report you created. After you must quit and restart your Epicor for the Menu changes to take effect.
 
