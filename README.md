@@ -544,8 +544,10 @@ private void edvUD105A\_EpiViewNotification(EpiDataView view, EpiNotifyArgs args
 
 We must now return to our AddLineBtn\_Click Function and remove the following line of code.
 
+```
 //REMOVE THE BELOW LINE OF CODE LATER ON
 labelsArray.dataView\[labelsArray.Row\]\["ChildKey1"\] = POLine;
+```
 
 Test your code for compiling errors and correct them if necessary. Save your customization. Close and reopen the UD Menu for the changes to take place. Test the button.
 
