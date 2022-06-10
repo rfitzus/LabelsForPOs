@@ -116,16 +116,7 @@ You must now run the "Regenerate the Data Model" process for this field to becom
 #### Step 4 
 *Regenerate the Data Model*
 
-Regenerating the data model updates all the fields within each SQL table. The new fields you've setup are added when this process takes place. In order to run this process you must connect to your server where you have your Epicor ERP Administrative console installed.
-
-1. Open the Epicor Admistration Console.
-2. From the sidebar select the Server you are working in.
-3. Run Task Agent Configuration.
-
-![](images/04-LabelPOReceipts_12-1024x459.png)
-
-1. Highlight the server you are working in.
-2. Under Actions, Select "Stop Agent".
+Regenerating the data model updates all the fields within each SQL table. The new fields you've setup are added when this process takes place. In order to run this process you must connect to your server where you have your Epicor ERP Administrative console installed.  Open the Epicor Admistration Console.  From the sidebar select the Server you are working in.  Run Task Agent Configuration. Highlight the server you are working in. Under Actions, Select "Stop Agent".
 
 ![](images/04-LabelPOReceipts_13.png)
 
