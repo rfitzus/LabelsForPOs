@@ -299,7 +299,9 @@ using System.Reflection;
 
 You now have to add the below line of code to the public class Script section of code.
 
+```
 Infragistics.Win.UltraWinDock.UltraDockManager dock;
+```
 
 Within the InitializeCustomCode Section add the below code. Depending on which UD table you're using change the "UD105" within the code to match your UD table number.
 
