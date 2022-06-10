@@ -486,7 +486,7 @@ private void edvUD105A\_EpiViewNotification(EpiDataView view, EpiNotifyArgs args
 }
 ```
 
-The ection of code below (args.Row > -1) is what we will add. It performs the auto increment process. When a new line is added to the Child Key list this code checks if the new line is the very first line. If so it sets the primary key to 001. If the new line is not the first row then it checks the previous lines value and increments it by 1.
+The section of code below (args.Row > -1) is what we will add. It performs the auto increment process. When a new line is added to the Child Key list this code checks if the new line is the very first line. If so it sets the primary key to 001. If the new line is not the first row then it checks the previous lines value and increments it by 1.
 
 ```
 private void edvUD105A\_EpiViewNotification(EpiDataView view, EpiNotifyArgs args)
