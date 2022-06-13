@@ -1,5 +1,5 @@
 # Labels For POs
-Generating individual tags in Epicor can be completed during Receipt Entry but generating an entire PO worth of labels can be tedious.  A tag must be printed for each individual line item.  This customization was created to pull in an entire PO and print all the labels simultaneously. You can continue to add additional POs to your list and print one large list of labels all simultaneously.  
+Generating individual tags can be completed during Receipt Entry but generating an entire PO worth of labels can be tedious.  A tag must be printed for each individual line item.  This customization was created to pull in an entire PO and print all the labels simultaneously. You can continue to add additional POs to your list and print one large list of labels all simultaneously.  
 
 The PO Receipt Label Entry program is a customized menu for printing labels with barcodes. It was created using the User Defined Tables. The UD Tables are empty menus you can customize to fit your needs.
 
@@ -41,7 +41,7 @@ _System Setup > Security Maintenance > **Menu Maintenance**_
 
 ---
 
-**Here you are going to add the User Defined Menu program to your main menu within Epicor.**
+**Here you are going to add the User Defined Menu program to your main menu.**
 
 1. Highlight which menu folder you want to add the User Defined Menu to.
 2. Select the New Menu button from the new dropdown arrow.
@@ -51,13 +51,13 @@ _System Setup > Security Maintenance > **Menu Maintenance**_
 **You must name your menu item and fill in the other credentials.**
 
 1. Give your menu item an ID number. (Max 8 characters)
-2. Enter a name for your menu item. This name will show within the Epicor Main Menu.
+2. Enter a name for your menu item. This name will show within the Main Menu.
 3. Give the menu item an order sequence. Usually between 0 and 200 where 0 is the top of the list and 200 is the bottom.
 4. Leave program type as "Menu item".
 5. Click the Program button and select between "Ice.UI.UD100Entry.dll" and "Ice.UI.UD110Entry.dll". Pick one that you have not already customized.
 6. This customization field will be used later on after we customize the UD Menu.
 
-After completing the above steps you must quit and restart your Epicor for the Menu changes to take effect.
+After completing the above steps you must quit and restart for the Menu changes to take effect.
 
 ![](images/04-LabelPOReceipts_03.png)
 
@@ -66,12 +66,12 @@ After completing the above steps you must quit and restart your Epicor for the M
 
 **Enable Developer Mode and open your UD Menu.**
 
-- After restarting Epicor, navigate through the main menu to where you added your user defined menu item. In this example it was _Material Management > Shipping/Receiving > PO Receipt Labels._ When you open this menu you'll be in the default User Defined Table Menu. This is what we will be customizing to create our PO Receipt Labels Program.
+- After restarting navigate through the main menu to where you added your user defined menu item. In this example it was _Material Management > Shipping/Receiving > PO Receipt Labels._ When you open this menu you'll be in the default User Defined Table Menu. This is what we will be customizing to create our PO Receipt Labels Program.
 
 ![](images/04-LabelPOReceipts_04.png)
 
 - We are now able to begin customizing our UD table menu, but first we will rearrange the menu's interface so it is more functional.
-- There are two tabs in the first row, Detail and Child. Drag the Child tab down to bottom of the Epicor menu and drop it there.
+- There are two tabs in the first row, Detail and Child. Drag the Child tab down to bottom of the menu and drop it there.
 
 ![](images/04-LabelPOReceipts_05-1024x577.png)
 
@@ -79,7 +79,7 @@ After completing the above steps you must quit and restart your Epicor for the M
 
 ![](images/04-LabelPOReceipts_06-1024x675.png)
 
-- We will now drag the lower Detail tab across the Epicor Menu and drop it on the far right side of the interface.
+- We will now drag the lower Detail tab across the Menu and drop it on the far right side of the interface.
 
 ![](images/04-LabelPOReceipts_07-1024x675.png)
 
@@ -90,7 +90,7 @@ After completing the above steps you must quit and restart your Epicor for the M
 #### Step 3 
 *Adding Fields through Extended UD Table Maintenance*
 
-In our customized UD Menu we need access to Purchase Order data. For us to be able to access PO data we need to add a PO Field to our Parent UD table. We will be adding a PO field to our UD table through the Extended UD Table Maintenance Program. When we create this new field we will add a like value that links this new field to the PO Header data table in Epicor. Later on this will allow us to access PO information using a feature called Foreign Key Views.
+In our customized UD Menu we need access to Purchase Order data. For us to be able to access PO data we need to add a PO Field to our Parent UD table. We will be adding a PO field to our UD table through the Extended UD Table Maintenance Program. When we create this new field we will add a like value that links this new field to the PO Header data table. Later on this will allow us to access PO information using a feature called Foreign Key Views.
 
 ---
 
@@ -124,9 +124,9 @@ You must now run the "Regenerate the Data Model" process for this field to becom
 #### Step 4 
 *Regenerate the Data Model*
 
-Regenerating the data model updates all the fields within each SQL table. The new fields you've setup are added when this process takes place. In order to run this process you must connect to your server where you have your Epicor ERP Administrative console installed.  Open the Epicor Admistration Console.  From the sidebar select the Server you are working in.  Run Task Agent Configuration. Highlight the server you are working in. Under Actions, Select "Stop Agent".
+Regenerating the data model updates all the fields within each SQL table. The new fields you've setup are added when this process takes place. In order to run this process you must connect to your server where you have your ERP Administrative console installed.  Open the Admistration Console.  From the sidebar select the Server you are working in.  Run Task Agent Configuration. Highlight the server you are working in. Under Actions, Select "Stop Agent".
 
-1. Ensure all Epicor Users are logged off before running this process. Once the task agent has stopped, return to the Epicor Admin Console and Stop the Application Pool. This will take a few seconds. Once it's complete the green "Started" symbol will change to red and say "Stopped".
+1. Ensure all users are logged off before running this process. Once the task agent has stopped, return to the Admin Console and Stop the Application Pool. This will take a few seconds. Once it's complete the green "Started" symbol will change to red and say "Stopped".
 
 ![](images/04-LabelPOReceipts_14-1024x293.png)
 
@@ -143,7 +143,7 @@ Regenerating the data model updates all the fields within each SQL table. The ne
 
 ![](images/04-LabelPOReceipts_17.png)
 
-- Start the application pool again and turn on the task agent. You can now return to Epicor to see that the UD table is now in sync.
+- Start the application pool again and turn on the task agent. You can now see that the UD table is now in sync.
 
 ![](images/04-LabelPOReceipts_18.png)
 
@@ -833,7 +833,7 @@ _System Setup > Security Maintenance > **Menu Maintenance**_
 
 ---
 
-Add this BAQ Report to the Epicor Main Menu. For Program Type use BAQ Report. Click the Report Button and select your BAQ Report you created. After you must quit and restart your Epicor for the Menu changes to take effect.
+Add this BAQ Report to the Main Menu. For Program Type use BAQ Report. Click the Report Button and select your BAQ Report you created. After you must quit and restart for the Menu changes to take effect.
 
 ![](images/04-LabelPOReceipts_73.png)
 
@@ -899,7 +899,7 @@ if (BAQReportForm.LaunchFormOptions != null)
 }
 ```
 
-We must now set both the UD Menu Customization as the default menu as well as the BAQ Report Customization. In Menu Maintenance change the Customization tab to your customization you created. You must close out of Epicor and Log back in for the changes to take place.
+We must now set both the UD Menu Customization as the default menu as well as the BAQ Report Customization. In Menu Maintenance change the Customization tab to your customization you created. You must close out and log back in for the changes to take place.
 
 ![](images/04-LabelPOReceipts_73.png)
 
