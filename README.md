@@ -278,8 +278,6 @@ Save your changes, close out of your User Defined Menu and reopen it.
 
 ![](images/04-LabelPOReceipts_40.png)
 
-This Custom Code is taken from: [https://gist.github.com/strepicor/10b8e95e643c6c1ed0e10f7247b1148e](https://gist.github.com/strepicor/10b8e95e643c6c1ed0e10f7247b1148e)
-
 At the beginning of the customized script there is a list of namespaces. These are used to reference other portions of code.
 
 ```
@@ -845,8 +843,6 @@ We need to add a third button to the UD Menu. This will be the print button. Its
 ![](images/04-LabelPOReceipts_74.png)
 
 Within the function created by the event wizard add the following code.
-
-Code Taken From: [http://erp.ittoolbox.com/groups/technical-functional/epicor-l/button-to-print-a-baq-report-5264754](http://erp.ittoolbox.com/groups/technical-functional/epicor-l/button-to-print-a-baq-report-5264754)
 
 ```
 private void PrintBtn\_Click(object sender, System.EventArgs args)
