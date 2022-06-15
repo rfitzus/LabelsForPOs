@@ -520,9 +520,9 @@ private void edvUD105A\_EpiViewNotification(EpiDataView view, EpiNotifyArgs args
                this.oTrans.Update();
                this.oTrans.Refresh();                  
            }
-           /\*If this is not row 1 read the previous row number.  Add 1 to the Previous rownum to get our current rownum.  
-                If a row is deleted rownumbers can begin duplicating.  Reading the previous row number prevents duplication.
-                \*/ 
+           /*If this is not row 1 read the previous row number.  Add 1 to the Previous rownum to get our current rownum.  
+             If a row is deleted rownumbers can begin duplicating.  Reading the previous row number prevents duplication.
+           */ 
           else
           {
                prevRowNum = Convert.ToInt32((decimal)view.dataView\[args.Row-1\]\["Number01"\]);
@@ -596,7 +596,7 @@ This new function is called when the AddPOBtn is clicked. We must add some code 
 ```
 private void AddPOBtn\_Click(object sender, System.EventArgs args)
     {
-        // \*\* Place Event Handling Code Here \*\*
+        // ** Place Event Handling Code Here **
     }
 ```
 
@@ -605,7 +605,7 @@ A basic test can be done to see if the button event is triggering. Add a Message
 ```
 private void AddPOBtn\_Click(object sender, System.EventArgs args)
     {
-        // \*\* Place Event Handling Code Here \*\*
+        // ** Place Event Handling Code Here **
 
         MessageBox.Show("Test");
     }
@@ -623,7 +623,7 @@ We want the AddPOBtn\_Click function to add each PO Line from the PO grid to the
 ```
 private void AddPOBtn\_Click(object sender, System.EventArgs args)
     {
-        // \*\* Place Event Handling Code Here \*\*
+        // ** Place Event Handling Code Here **
 
         
 //MessageBox.Show("Test");
@@ -858,10 +858,10 @@ private void PrintBtn\_Click(object sender, System.EventArgs args)
 
             LaunchFormOptions lfo = new LaunchFormOptions(); 
     
-            // \*\* this is where you would set the parameter to pass to the BAQReport Form
+            // ** this is where you would set the parameter to pass to the BAQReport Form
             lfo.ContextValue = UD105A\_Arr.dataView\[UD105A\_Arr.Row\]\["Key1"\];
     
-            // \*\* LBLPRINT would be the MenuID for the BAQReport w/ Customization                    
+            // ** LBLPRINT would be the MenuID for the BAQReport w/ Customization                    
             ProcessCaller.LaunchForm(oTrans, "UDLBLRPT", lfo); 
         }
    
