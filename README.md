@@ -344,18 +344,14 @@ Add a button to your menu just like you added the textbox and ultragrid. In the 
 
 In the script editor a few new lines of code have been added by the Event Wizard Tool.
 
-Under **InitialCustomCode()** the below code has been added. It's used to trigger an event when the AddLineBtn is clicked. It triggers the AddLineBtn\_Click Function to run.
+Under **InitialCustomCode()** the below code has been added. It's used to trigger an event when the AddLineBtn is clicked. It triggers the AddLineBtn_Click Function to run.
 
 ```
-this.AddLineBtn.Click += new System.EventHandler(this.AddLineBtn\_Click);
+this.AddLineBtn.Click += new System.EventHandler(this.AddLineBtn_Click);
 
-Under **DestroyCustomCode()** the below code disables the button when your done using the UD Menu.
+this.AddLineBtn.Click -= new System.EventHandler(this.AddLineBtn_Click);
 
-this.AddLineBtn.Click -= new System.EventHandler(this.AddLineBtn\_Click);
-
-This new function is called when the AddLineBtn is clicked. We must add some code to it. Currently it does nothing.
-
-private void AddLineBtn\_Click(object sender, System.EventArgs args)
+private void AddLineBtn_Click(object sender, System.EventArgs args)
 {
     // \*\* Place Event Handling Code Here \*\*
 }
