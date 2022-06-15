@@ -314,7 +314,7 @@ Within the InitializeCustomCode Section add the below code. Depending on which U
 ```
 Object obj = typeof(Ice.UI.App.UD105Entry.UD105Form).InvokeMember("baseDockManager", BindingFlags.Instance | BindingFlags.GetField | BindingFlags.NonPublic, null, UD105Form, null);
 dock =  (Infragistics.Win.UltraWinDock.UltraDockManager)obj;                  
-dock.DockAreas\[0\].Panes\[0\].Closed = true;
+dock.DockAreas[0].Panes[0].Closed = true;
 ```
 
 From the tools dropdown click test code.
@@ -348,9 +348,16 @@ Under **InitialCustomCode()** the below code has been added. It's used to trigge
 
 ```
 this.AddLineBtn.Click += new System.EventHandler(this.AddLineBtn_Click);
+```
+Under **DestroyCustomCode()** the below code disables the button when your done using the UD Menu.
 
+```
 this.AddLineBtn.Click -= new System.EventHandler(this.AddLineBtn_Click);
+```
 
+This new function is called when the AddLineBtn is clicked. We must add some code to it. Currently it does nothing.
+
+```
 private void AddLineBtn_Click(object sender, System.EventArgs args)
 {
     // ** Place Event Handling Code Here **
@@ -360,7 +367,7 @@ private void AddLineBtn_Click(object sender, System.EventArgs args)
 A basic test can be done to see if the button event is triggering. Add a Messagebox line to your code and under tools run Test Code.
 
 ```
-private void AddLineBtn\_Click(object sender, System.EventArgs args)
+private void AddLineBtn_Click(object sender, System.EventArgs args)
 {
     // ** Place Event Handling Code Here **
     MessageBox.Show("Test");
@@ -371,57 +378,58 @@ To test the button you must close the UD Menu and reopen it. Click the Add Line 
 
 ![](images/04-LabelPOReceipts_46.png)
 
-We want the AddLineBtn\_Click function to take the highlighted PO Line from the PO grid and add it to the bottom table. There are two variables you must change for this code to work with your setup:
+We want the AddLineBtn_Click function to take the highlighted PO Line from the PO grid and add it to the bottom table. There are two variables you must change for this code to work with your setup:
 
-- The UD105\_PODetail must be changed to match your EpiBinding property on your PO Ultragrid.
+- The UD105_PODetail must be changed to match your EpiBinding property on your PO Ultragrid.
 - The UD105A must be changed to match your UD Table. Keep the A because it is relevant to the child table.
 
 ```
 private void AddLineBtn_Click(object sender, System.EventArgs args)
-{
-	// ** Place Event Handling Code Here **
-
-	//GATHER THE PO LINE DATA
-	//Find the Highlighted PONum, POLine, OurQty, PartNum
-	EpiDataView POArray = ((EpiDataView)oTrans.EpiDataViews["UD100_PODetail"]);
-	EpiDataView UD100PONum = ((EpiDataView)oTrans.EpiDataViews["UD100_PONum"]);
-
-	int PONum = (int)POArray.dataView[POArray.Row]["PONum"];
-	int POLine = (int)POArray.dataView[POArray.Row]["POLine"];
-	string LineDesc = (string)POArray.dataView[POArray.Row]["LineDesc"];
-	decimal OurQty = (decimal)POArray.dataView[POArray.Row]["XOrderQty"];
-	string PartNum = (string)POArray.dataView[POArray.Row]["PartNum"];
-	string VenPartNum = (string)POArray.dataView[POArray.Row]["VenPartNum"];
-	string UOM = (string)POArray.dataView[POArray.Row]["IUM"];
-	string Class = (string)POArray.dataView[POArray.Row]["ClassID"];
-	string VendorName = (string)UD100PONum.dataView[UD100PONum.Row]["VendorName"];
-
-
-
-	//APPLY THE DATA TO THE NEW LINE
-	//Create a new row for UD100A
-	EpiDataView labelsArray = ((EpiDataView)oTrans.EpiDataViews["UD100A"]);
-	this.oTrans.GetNewChild();
-
-	//Begin Editing Row
-	labelsArray.dataView[labelsArray.Row].BeginEdit();			
-
-	//Set the UD100A Variables to Match Variables Found Above
-	labelsArray.dataView[labelsArray.Row]["PONum_c"] = PONum;
-	labelsArray.dataView[labelsArray.Row]["POLine_c"] = POLine;
-	labelsArray.dataView[labelsArray.Row]["Character01"] = LineDesc;
-	labelsArray.dataView[labelsArray.Row]["LabelQty_c"] = Convert.ToInt32(OurQty);
-	labelsArray.dataView[labelsArray.Row]["ShortChar01"] = PartNum;
-	labelsArray.dataView[labelsArray.Row]["ShortChar02"] = UOM;
-	labelsArray.dataView[labelsArray.Row]["ShortChar03"] = Class;
-	labelsArray.dataView[labelsArray.Row]["ShortChar04"] = VendorName;
-	labelsArray.dataView[labelsArray.Row]["ShortChar05"] = VenPartNum;
-
-	//Complete Editing the Row and Save
-	labelsArray.dataView[labelsArray.Row].EndEdit();
-	this.oTrans.Update();
-	this.oTrans.Refresh();	
-}
+    {
+        // ** Place Event Handling Code Here **
+        //MessageBox.Show("Test");
+ 
+         
+//GATHER THE PO LINE DATA
+        //Find the Highlighted PONum, POLine, OurQty, PartNum
+        //*****Change "UD105_PODetail" below to match the EpiBinding property on your PO UltraGrid*****
+        EpiDataView POArray = ((EpiDataView)oTrans.EpiDataViews["UD105_PODetail"]);
+ 
+        int PONum = (int)POArray.dataView[POArray.Row]["PONum"];
+        int POLine = (int)POArray.dataView[POArray.Row]["POLine"];
+        decimal OurQty = (decimal)POArray.dataView[POArray.Row]["XOrderQty"];
+        string PartNum = (string)POArray.dataView[POArray.Row]["PartNum"];
+        string UOM = (string)POArray.dataView[POArray.Row]["IUM"];
+        string Class = (string)POArray.dataView[POArray.Row]["ClassID"];
+ 
+ 
+        //APPLY THE DATA TO THE NEW LINE
+        //Create a new row for UD105A
+        //*****Change "UD105A" below to match the UDTable your using*****
+        EpiDataView labelsArray = ((EpiDataView)oTrans.EpiDataViews["UD105A"]);
+        this.oTrans.GetNewChild();
+ 
+        //Begin Editing Row
+        labelsArray.dataView[labelsArray.Row].BeginEdit();          
+ 
+        //Set the UD105A Variables to Match Variables Found Above
+        //labelsArray.dataView[labelsArray.Row]["PONum_c"] = PONum;
+        //labelsArray.dataView[labelsArray.Row]["POLine_c"] = POLine;
+        //labelsArray.dataView[labelsArray.Row]["LabelQty_c"] = Convert.ToInt32(OurQty);
+ 
+        //REMOVE THE BELOW LINE OF CODE LATER ON
+        labelsArray.dataView[labelsArray.Row]["ChildKey1"] = POLine;
+ 
+        labelsArray.dataView[labelsArray.Row]["ShortChar01"] = PartNum;
+        labelsArray.dataView[labelsArray.Row]["ShortChar02"] = UOM;
+        labelsArray.dataView[labelsArray.Row]["ShortChar03"] = Class;
+ 
+        //Complete Editing the Row and Save
+        labelsArray.dataView[labelsArray.Row].EndEdit();
+        this.oTrans.Update();
+        this.oTrans.Refresh();
+   
+    }
 ```
 
 Test your code for compiling errors and correct them if necessary. Save your customization. Close and reopen the UD Menu for the changes to take place. Test the Add Line button.
@@ -459,24 +467,24 @@ private EpiDataView edvUD105A;
 Under InitialCustomCode() the below code has been added. It will trigger the event when a change occurs in the UD105A Child Key list.
 
 ```
-this.edvUD105A = ((EpiDataView)(this.oTrans.EpiDataViews\["UD105A"\]));
-this.edvUD105A.EpiViewNotification += new EpiViewNotification(this.edvUD105A\_EpiViewNotification);
+this.edvUD105A = ((EpiDataView)(this.oTrans.EpiDataViews["UD105A"]));
+this.edvUD105A.EpiViewNotification += new EpiViewNotification(this.edvUD105A_EpiViewNotification);
 ```
 
 Under DestroyCustomCode() the below code disables the event trigger when you close the UD Menu.
 
 ```
-this.edvUD105A.EpiViewNotification -= new EpiViewNotification(this.edvUD105A\_EpiViewNotification);
+this.edvUD105A.EpiViewNotification -= new EpiViewNotification(this.edvUD105A_EpiViewNotification);
 this.edvUD105A = null;
 ```
 
 This is the new event function that is called when a change occurs in the Child Key List. We must add some code to it. There is an IF statement that checks if a new row was added to the list. This is where we will add our code.
 
 ```
-private void edvUD105A\_EpiViewNotification(EpiDataView view, EpiNotifyArgs args)
+private void edvUD105A_EpiViewNotification(EpiDataView view, EpiNotifyArgs args)
 {
    // ** Argument Properties and Uses **
-   // view.dataView\[args.Row\]\["FieldName"\]
+   // view.dataView[args.Row]["FieldName"]
    // args.Row, args.Column, args.Sender, args.NotifyType
    // NotifyType.Initialize, NotifyType.AddRow, NotifyType.DeleteRow, NotifyType.InitLastView, NotifyType.InitAndResetTreeNodes
    if ((args.NotifyType == EpiTransaction.NotifyType.AddRow))
@@ -491,64 +499,64 @@ private void edvUD105A\_EpiViewNotification(EpiDataView view, EpiNotifyArgs args
 The section of code below (args.Row > -1) is what we will add. It performs the auto increment process. When a new line is added to the Child Key list this code checks if the new line is the very first line. If so it sets the primary key to 001. If the new line is not the first row then it checks the previous lines value and increments it by 1.
 
 ```
-private void edvUD105A\_EpiViewNotification(EpiDataView view, EpiNotifyArgs args)
+private void edvUD105A_EpiViewNotification(EpiDataView view, EpiNotifyArgs args)
 {
    // ** Argument Properties and Uses **
-   // view.dataView\[args.Row\]\["FieldName"\]
+   // view.dataView[args.Row]["FieldName"]
    // args.Row, args.Column, args.Sender, args.NotifyType
    // NotifyType.Initialize, NotifyType.AddRow, NotifyType.DeleteRow, NotifyType.InitLastView, NotifyType.InitAndResetTreeNodes
    if ((args.NotifyType == EpiTransaction.NotifyType.AddRow))
    {
        if ((args.Row > -1))
        {
-
-           
+ 
+            
 //Find the rownumber for this new line. args.Row is the row number but it starts at 0 so we add 1 to it. 
            int rowNum = args.Row +1;
            int prevRowNum;
-
+ 
            //If this is the first row save this as row 1.
            if (rowNum == 1)
            {
-               view.dataView\[view.Row\].BeginEdit();
-               view.dataView\[view.Row\]\["ChildKey1"\] = (rowNum).ToString("000");
-               view.dataView\[view.Row\]\["Number01"\] = (rowNum);
-               view.dataView\[view.Row\]\["Number03"\] = 1;
-                    
+               view.dataView[view.Row].BeginEdit();
+               view.dataView[view.Row]["ChildKey1"] = (rowNum).ToString("000");
+               view.dataView[view.Row]["Number01"] = (rowNum);
+               view.dataView[view.Row]["Number03"] = 1;
+                     
                //Save Data to Row
-               view.dataView\[view.Row\].EndEdit();
+               view.dataView[view.Row].EndEdit();
                this.oTrans.Update();
                this.oTrans.Refresh();                  
            }
            /*If this is not row 1 read the previous row number.  Add 1 to the Previous rownum to get our current rownum.  
-             If a row is deleted rownumbers can begin duplicating.  Reading the previous row number prevents duplication.
-           */ 
+                If a row is deleted rownumbers can begin duplicating.  Reading the previous row number prevents duplication.
+                */
           else
           {
-               prevRowNum = Convert.ToInt32((decimal)view.dataView\[args.Row-1\]\["Number01"\]);
+               prevRowNum = Convert.ToInt32((decimal)view.dataView[args.Row-1]["Number01"]);
                rowNum = prevRowNum + 1;
-                
-               view.dataView\[view.Row\].BeginEdit();
-               view.dataView\[view.Row\]\["ChildKey1"\] = (rowNum).ToString("000");
-               view.dataView\[view.Row\]\["Number01"\] = (rowNum);
-               view.dataView\[view.Row\]\["Number03"\] = 1;
-                    
+                 
+               view.dataView[view.Row].BeginEdit();
+               view.dataView[view.Row]["ChildKey1"] = (rowNum).ToString("000");
+               view.dataView[view.Row]["Number01"] = (rowNum);
+               view.dataView[view.Row]["Number03"] = 1;
+                     
                //Save Data to Row
-               view.dataView\[view.Row\].EndEdit();
+               view.dataView[view.Row].EndEdit();
                this.oTrans.Update();
                this.oTrans.Refresh();
            }
-           
+            
        }
    }
 }
 ```
 
-We must now return to our AddLineBtn\_Click Function and remove the following line of code.
+We must now return to our AddLineBtn_Click Function and remove the following line of code.
 
 ```
 //REMOVE THE BELOW LINE OF CODE LATER ON
-labelsArray.dataView\[labelsArray.Row\]\["ChildKey1"\] = POLine;
+labelsArray.dataView[labelsArray.Row]["ChildKey1"] = POLine;
 ```
 
 Test your code for compiling errors and correct them if necessary. Save your customization. Close and reopen the UD Menu for the changes to take place. Test the button.
@@ -581,20 +589,20 @@ In the script editor a few new lines of code have been added by the Event Wizard
 
 Under **InitialCustomCode()** the below code has been added. It's used to trigger an event when the AddPOBtn is clicked. It triggers the AddPOBtn\_Click Function to run.
 
-```
-this.AddPOBtn.Click += new System.EventHandler(this.AddPOBtn\_Click);
+```	
+this.AddPOBtn.Click += new System.EventHandler(this.AddPOBtn_Click);
 ```
 
 Under **DestroyCustomCode()** the below code disables the button when you're done using the UD Menu.
 
 ```
-this.AddPOBtn.Click -= new System.EventHandler(this.AddPOBtn\_Click);
+this.AddPOBtn.Click -= new System.EventHandler(this.AddPOBtn_Click);
 ```
 
 This new function is called when the AddPOBtn is clicked. We must add some code to it. Currently it does nothing.
 
 ```
-private void AddPOBtn\_Click(object sender, System.EventArgs args)
+private void AddPOBtn_Click(object sender, System.EventArgs args)
     {
         // ** Place Event Handling Code Here **
     }
@@ -603,10 +611,10 @@ private void AddPOBtn\_Click(object sender, System.EventArgs args)
 A basic test can be done to see if the button event is triggering. Add a Messagebox line to your code and under tools run Test Code.
 
 ```
-private void AddPOBtn\_Click(object sender, System.EventArgs args)
+private void AddPOBtn_Click(object sender, System.EventArgs args)
     {
         // ** Place Event Handling Code Here **
-
+ 
         MessageBox.Show("Test");
     }
 ```
@@ -621,48 +629,48 @@ We want the AddPOBtn\_Click function to add each PO Line from the PO grid to the
 - The UD105\_PODetail must be changed to match your EpiBinding property on your PO Ultragrid.
 
 ```
-private void AddPOBtn\_Click(object sender, System.EventArgs args)
+private void AddPOBtn_Click(object sender, System.EventArgs args)
     {
         // ** Place Event Handling Code Here **
-
-        
+ 
+         
 //MessageBox.Show("Test");
-
-        EpiDataView labelsArray = ((EpiDataView)oTrans.EpiDataViews\["UD105A"\]);
-        EpiDataView POArray = ((EpiDataView)oTrans.EpiDataViews\["UD105\_PODetail"\]);
-        
+ 
+        EpiDataView labelsArray = ((EpiDataView)oTrans.EpiDataViews["UD105A"]);
+        EpiDataView POArray = ((EpiDataView)oTrans.EpiDataViews["UD105_PODetail"]);
+         
         foreach(DataRow dr in POArray.dataView.Table.Rows) 
         {
             //GATHER THE PO LINE DATA
             //Find the Highlighted PONum, POLine, OurQty, PartNum
-            int PONum = (int)dr\["PONum"\];
-            int POLine = (int)dr\["POLine"\];
-            decimal OurQty = (decimal)dr\["XOrderQty"\];
-            string PartNum = (string)dr\["PartNum"\];
-            string UOM = (string)dr\["IUM"\];
-            string Class = (string)dr\["ClassID"\];
-
+            int PONum = (int)dr["PONum"];
+            int POLine = (int)dr["POLine"];
+            decimal OurQty = (decimal)dr["XOrderQty"];
+            string PartNum = (string)dr["PartNum"];
+            string UOM = (string)dr["IUM"];
+            string Class = (string)dr["ClassID"];
+ 
             //APPLY THE DATA TO THE NEW LINE
             //Create a new row for UD105A
             this.oTrans.GetNewChild();
-
+ 
             //Begin Editing Row
-            labelsArray.dataView\[labelsArray.Row\].BeginEdit();
-
+            labelsArray.dataView[labelsArray.Row].BeginEdit();
+ 
             //Set the UD105A Variables to Match Variables Found Above
-            labelsArray.dataView\[labelsArray.Row\]\["PONum\_c"\] = PONum;
-            labelsArray.dataView\[labelsArray.Row\]\["POLine\_c"\] = POLine;
-            labelsArray.dataView\[labelsArray.Row\]\["LabelQty\_c"\] = Convert.ToInt32(OurQty);
-            labelsArray.dataView\[labelsArray.Row\]\["ShortChar01"\] = PartNum;
-            labelsArray.dataView\[labelsArray.Row\]\["ShortChar02"\] = UOM;
-            labelsArray.dataView\[labelsArray.Row\]\["ShortChar03"\] = Class;
-
+            labelsArray.dataView[labelsArray.Row]["PONum_c"] = PONum;
+            labelsArray.dataView[labelsArray.Row]["POLine_c"] = POLine;
+            labelsArray.dataView[labelsArray.Row]["LabelQty_c"] = Convert.ToInt32(OurQty);
+            labelsArray.dataView[labelsArray.Row]["ShortChar01"] = PartNum;
+            labelsArray.dataView[labelsArray.Row]["ShortChar02"] = UOM;
+            labelsArray.dataView[labelsArray.Row]["ShortChar03"] = Class;
+ 
             //Complete Editing the Row and Save
-            labelsArray.dataView\[labelsArray.Row\].EndEdit();
+            labelsArray.dataView[labelsArray.Row].EndEdit();
             this.oTrans.Update();
             this.oTrans.Refresh();
-	}
-
+    	}
+ 
     }
 ```
 
@@ -841,30 +849,30 @@ We need to add a third button to the UD Menu. This will be the print button. Its
 Within the function created by the event wizard add the following code.
 
 ```
-private void PrintBtn\_Click(object sender, System.EventArgs args)
+private void PrintBtn_Click(object sender, System.EventArgs args)
     //Launch the BAQReport to print the labels
     //Pass a parmater into the BAQReport(A Customization on the BAQReport Form is Required to accept a Parameter)
     {
-        // \*\* Place Event Handling Code Here \*\*
-
-        
-	//Update and save the lines before launching the BAQReport Form
-        EpiDataView UD105A\_Arr = ((EpiDataView)oTrans.EpiDataViews\["UD105A"\]);
+        // ** Place Event Handling Code Here **
+ 
+         
+    //Update and save the lines before launching the BAQReport Form
+        EpiDataView UD105A_Arr = ((EpiDataView)oTrans.EpiDataViews["UD105A"]);
         this.oTrans.Update();
         this.oTrans.Refresh();
-
-        if(UD105A\_Arr.Row > -1)
+ 
+        if(UD105A_Arr.Row > -1)
         {
-
+ 
             LaunchFormOptions lfo = new LaunchFormOptions(); 
-    
+     
             // ** this is where you would set the parameter to pass to the BAQReport Form
-            lfo.ContextValue = UD105A\_Arr.dataView\[UD105A\_Arr.Row\]\["Key1"\];
-    
+            lfo.ContextValue = UD105A_Arr.dataView[UD105A_Arr.Row]["Key1"];
+     
             // ** LBLPRINT would be the MenuID for the BAQReport w/ Customization                    
             ProcessCaller.LaunchForm(oTrans, "UDLBLRPT", lfo); 
         }
-   
+    
     }
 ```
 
@@ -879,14 +887,14 @@ Before the print button will work properly we must customize your BAQ Report men
 Add the following highlighted lines of code to the Script Editor. Save the customization.
 
 ```
-private void BAQReportForm\_Load(object sender, EventArgs args)
+private void BAQReportForm_Load(object sender, EventArgs args)
 {
     // Add Event Handler Code
-    
+     
 if (BAQReportForm.LaunchFormOptions != null) 
     { 
-        EpiDataView edv = (EpiDataView)oTrans.EpiDataViews\["ReportParam"\]; 
-        edv.dataView\[edv.Row\]\["field1"\] = BAQReportForm.LaunchFormOptions.ContextValue.ToString(); 
+        EpiDataView edv = (EpiDataView)oTrans.EpiDataViews["ReportParam"]; 
+        edv.dataView[edv.Row]["field1"] = BAQReportForm.LaunchFormOptions.ContextValue.ToString(); 
     }
 }
 ```
