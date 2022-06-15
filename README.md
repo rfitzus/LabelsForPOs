@@ -397,7 +397,7 @@ private void AddLineBtn\_Click(object sender, System.EventArgs args)
 
         //APPLY THE DATA TO THE NEW LINE
         //Create a new row for UD105A
-        //\*\*\*\*\*Change "UD105A" below to match the UDTable your using\*\*\*\*\*
+        //*****Change "UD105A" below to match the UDTable your using*****
         EpiDataView labelsArray = ((EpiDataView)oTrans.EpiDataViews\["UD105A"\]);
         this.oTrans.GetNewChild();
 
@@ -475,7 +475,7 @@ This is the new event function that is called when a change occurs in the Child 
 ```
 private void edvUD105A\_EpiViewNotification(EpiDataView view, EpiNotifyArgs args)
 {
-   // \*\* Argument Properties and Uses \*\*
+   // ** Argument Properties and Uses **
    // view.dataView\[args.Row\]\["FieldName"\]
    // args.Row, args.Column, args.Sender, args.NotifyType
    // NotifyType.Initialize, NotifyType.AddRow, NotifyType.DeleteRow, NotifyType.InitLastView, NotifyType.InitAndResetTreeNodes
@@ -493,7 +493,7 @@ The section of code below (args.Row > -1) is what we will add. It performs the a
 ```
 private void edvUD105A\_EpiViewNotification(EpiDataView view, EpiNotifyArgs args)
 {
-   // \*\* Argument Properties and Uses \*\*
+   // ** Argument Properties and Uses **
    // view.dataView\[args.Row\]\["FieldName"\]
    // args.Row, args.Column, args.Sender, args.NotifyType
    // NotifyType.Initialize, NotifyType.AddRow, NotifyType.DeleteRow, NotifyType.InitLastView, NotifyType.InitAndResetTreeNodes
