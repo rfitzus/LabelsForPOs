@@ -377,51 +377,51 @@ We want the AddLineBtn\_Click function to take the highlighted PO Line from the 
 - The UD105A must be changed to match your UD Table. Keep the A because it is relevant to the child table.
 
 ```
-private void AddLineBtn\_Click(object sender, System.EventArgs args)
-    {
-        // ** Place Event Handling Code Here **
-        //MessageBox.Show("Test");
+private void AddLineBtn_Click(object sender, System.EventArgs args)
+{
+	// ** Place Event Handling Code Here **
 
-        
-//GATHER THE PO LINE DATA
-        //Find the Highlighted PONum, POLine, OurQty, PartNum
-        //*****Change "UD105\_PODetail" below to match the EpiBinding property on your PO UltraGrid*****
-        EpiDataView POArray = ((EpiDataView)oTrans.EpiDataViews\["UD105\_PODetail"\]);
+	//GATHER THE PO LINE DATA
+	//Find the Highlighted PONum, POLine, OurQty, PartNum
+	EpiDataView POArray = ((EpiDataView)oTrans.EpiDataViews["UD100_PODetail"]);
+	EpiDataView UD100PONum = ((EpiDataView)oTrans.EpiDataViews["UD100_PONum"]);
 
-        int PONum = (int)POArray.dataView\[POArray.Row\]\["PONum"\];
-        int POLine = (int)POArray.dataView\[POArray.Row\]\["POLine"\];
-        decimal OurQty = (decimal)POArray.dataView\[POArray.Row\]\["XOrderQty"\];
-        string PartNum = (string)POArray.dataView\[POArray.Row\]\["PartNum"\];
-        string UOM = (string)POArray.dataView\[POArray.Row\]\["IUM"\];
-        string Class = (string)POArray.dataView\[POArray.Row\]\["ClassID"\];
+	int PONum = (int)POArray.dataView[POArray.Row]["PONum"];
+	int POLine = (int)POArray.dataView[POArray.Row]["POLine"];
+	string LineDesc = (string)POArray.dataView[POArray.Row]["LineDesc"];
+	decimal OurQty = (decimal)POArray.dataView[POArray.Row]["XOrderQty"];
+	string PartNum = (string)POArray.dataView[POArray.Row]["PartNum"];
+	string VenPartNum = (string)POArray.dataView[POArray.Row]["VenPartNum"];
+	string UOM = (string)POArray.dataView[POArray.Row]["IUM"];
+	string Class = (string)POArray.dataView[POArray.Row]["ClassID"];
+	string VendorName = (string)UD100PONum.dataView[UD100PONum.Row]["VendorName"];
 
-        //APPLY THE DATA TO THE NEW LINE
-        //Create a new row for UD105A
-        //*****Change "UD105A" below to match the UDTable your using*****
-        EpiDataView labelsArray = ((EpiDataView)oTrans.EpiDataViews\["UD105A"\]);
-        this.oTrans.GetNewChild();
 
-        //Begin Editing Row
-        labelsArray.dataView\[labelsArray.Row\].BeginEdit();          
 
-        //Set the UD105A Variables to Match Variables Found Above
-        //labelsArray.dataView\[labelsArray.Row\]\["PONum\_c"\] = PONum;
-        //labelsArray.dataView\[labelsArray.Row\]\["POLine\_c"\] = POLine;
-        //labelsArray.dataView\[labelsArray.Row\]\["LabelQty\_c"\] = Convert.ToInt32(OurQty);
+	//APPLY THE DATA TO THE NEW LINE
+	//Create a new row for UD100A
+	EpiDataView labelsArray = ((EpiDataView)oTrans.EpiDataViews["UD100A"]);
+	this.oTrans.GetNewChild();
 
-        //REMOVE THE BELOW LINE OF CODE LATER ON
-        labelsArray.dataView\[labelsArray.Row\]\["ChildKey1"\] = POLine;
+	//Begin Editing Row
+	labelsArray.dataView[labelsArray.Row].BeginEdit();			
 
-        labelsArray.dataView\[labelsArray.Row\]\["ShortChar01"\] = PartNum;
-        labelsArray.dataView\[labelsArray.Row\]\["ShortChar02"\] = UOM;
-        labelsArray.dataView\[labelsArray.Row\]\["ShortChar03"\] = Class;
+	//Set the UD100A Variables to Match Variables Found Above
+	labelsArray.dataView[labelsArray.Row]["PONum_c"] = PONum;
+	labelsArray.dataView[labelsArray.Row]["POLine_c"] = POLine;
+	labelsArray.dataView[labelsArray.Row]["Character01"] = LineDesc;
+	labelsArray.dataView[labelsArray.Row]["LabelQty_c"] = Convert.ToInt32(OurQty);
+	labelsArray.dataView[labelsArray.Row]["ShortChar01"] = PartNum;
+	labelsArray.dataView[labelsArray.Row]["ShortChar02"] = UOM;
+	labelsArray.dataView[labelsArray.Row]["ShortChar03"] = Class;
+	labelsArray.dataView[labelsArray.Row]["ShortChar04"] = VendorName;
+	labelsArray.dataView[labelsArray.Row]["ShortChar05"] = VenPartNum;
 
-        //Complete Editing the Row and Save
-        labelsArray.dataView\[labelsArray.Row\].EndEdit();
-        this.oTrans.Update();
-        this.oTrans.Refresh();
-  
-    }
+	//Complete Editing the Row and Save
+	labelsArray.dataView[labelsArray.Row].EndEdit();
+	this.oTrans.Update();
+	this.oTrans.Refresh();	
+}
 ```
 
 Test your code for compiling errors and correct them if necessary. Save your customization. Close and reopen the UD Menu for the changes to take place. Test the Add Line button.
