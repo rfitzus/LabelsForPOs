@@ -353,7 +353,7 @@ this.AddLineBtn.Click -= new System.EventHandler(this.AddLineBtn_Click);
 
 private void AddLineBtn_Click(object sender, System.EventArgs args)
 {
-    // \*\* Place Event Handling Code Here \*\*
+    // ** Place Event Handling Code Here **
 }
 ```
 
@@ -362,7 +362,7 @@ A basic test can be done to see if the button event is triggering. Add a Message
 ```
 private void AddLineBtn\_Click(object sender, System.EventArgs args)
 {
-    // \*\* Place Event Handling Code Here \*\*
+    // ** Place Event Handling Code Here **
     MessageBox.Show("Test");
 }
 ```
@@ -379,13 +379,13 @@ We want the AddLineBtn\_Click function to take the highlighted PO Line from the 
 ```
 private void AddLineBtn\_Click(object sender, System.EventArgs args)
     {
-        // \*\* Place Event Handling Code Here \*\*
+        // ** Place Event Handling Code Here **
         //MessageBox.Show("Test");
 
         
 //GATHER THE PO LINE DATA
         //Find the Highlighted PONum, POLine, OurQty, PartNum
-        //\*\*\*\*\*Change "UD105\_PODetail" below to match the EpiBinding property on your PO UltraGrid\*\*\*\*\*
+        //*****Change "UD105\_PODetail" below to match the EpiBinding property on your PO UltraGrid*****
         EpiDataView POArray = ((EpiDataView)oTrans.EpiDataViews\["UD105\_PODetail"\]);
 
         int PONum = (int)POArray.dataView\[POArray.Row\]\["PONum"\];
